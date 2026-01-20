@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hrdy chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        #initial-screen {
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            margin-top: 30px;
+        }
+
+        #initial-screen h1 {
+            color: #bb86fc;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #bb86fc;
+            margin-bottom: 8px;
+        }
+
+        .input-group input, 
+        .input-group textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            font-size: 14px;
+            outline: none;
+            resize: none;
+        }
+
+        .input-group textarea {
+            height: 80px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #bb86fc;
+            color: #121212;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #9c6cd9;
+        }
+
+        .btn-secondary {
+            background-color: #3700b3;
+            color: #e0e0e0;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background-color: #29008a;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        #chat-screen {
+            display: none;
+            flex-direction: column;
+            height: 90vh;
+            justify-content: space-between;
+        }
+
+        .chat-header {
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .chat-header h2 {
+            color: #bb86fc;
+            font-size: 18px;
+        }
+
+        .chat-messages {
+            background-color: #1e1e1e;
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 15px;
+        }
+
+        .message-sender {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: #bb86fc;
+        }
+
+        .message-text {
+            font-size: 15px;
+            word-wrap: break-word;
+        }
+
+        .message-time {
+            font-size: 11px;
+            text-align: right;
+            margin-top: 3px;
+            color: #888;
+        }
+
+        .message-self {
+            background-color: #bb86fc;
+            color: #121212;
+            margin-left: auto;
+        }
+
+        .message-other {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #333;
+        }
+
+        #message-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            outline: none;
+            font-size: 15px;
+        }
+
+        #send-button {
+            padding: 12px 25px;
+            background-color: #bb86fc;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        #send-button:hover {
+            background-color: #9c6cd9;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2c2c2c;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #bb86fc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <audio src="lagu.mp3" autoplay loop></audio>
+        <!-- Halaman Awal dengan Tempat Kode Jelas -->
+        <div id="initial-screen">
+            <h1>Hrdy chat</h1>
+            
+            <!-- Kolom Nama -->
+            <div class="input-group">
+                <label for="username-input">✅ Masukkan Nama Anda:</label>
+                <input type="text" id="username-input" placeholder="Contoh: Hardy zen..." required>
+            </div>
+
+            <!-- Pilihan Peran -->
+            <div class="button-group">
+                <button class="btn btn-primary" id="host-btn">📌 Jadikan Saya Host</button>
+                <button class="btn btn-secondary" id="connect-btn">🔗 Hubungi Host</button>
+            </div>
+
+            <!-- Area untuk HOST -->
+            <div id="host-section" style="display: none;">
+                <div class="input-group">
+                    <label>📤 Langkah 1: Salin Kode Ini Berikan ke Teman:</label>
+                    <textarea id="host-offer-code" readonly placeholder="Kode akan muncul di sini..."></textarea>
+                    <button class="btn btn-primary action-btn" id="copy-host-code-btn">📋 Salin Kode</button>
+                </div>
+                <div class="input-group">
+                    <label>📥 Langkah 2: Tempel Kode Balasan dari Teman:</label>
+                    <textarea id="host-answer-code" placeholder="Tempel kode balasan di sini..."></textarea>
+                    <button class="btn btn-secondary action-btn" id="complete-host-btn">✅ Selesaikan Koneksi</button>
+                </div>
+            </div>
+
+            <!-- Area untuk PENGGUNA YANG MENGHUBUNGI -->
+            <div id="client-section" style="display: none;">
+                <div class="input-group">
+                    <label>📥 Langkah 1: Tempel Kode dari Host:</label>
+                    <textarea id="client-offer-code" placeholder="Tempel kode host di sini..."></textarea>
+                    <button class="btn btn-primary action-btn" id="send-client-request-btn">📤 Kirim Permintaan</button>
+                </div>
+                <div class="input-group">
+                    <label>📤 Langkah 2: Salin Kode Ini Berikan ke Host:</label>
+                    <textarea id="client-answer-code" readonly placeholder="Kode balasan akan muncul di sini..."></textarea>
+                    <button class="btn btn-primary action-btn" id="copy-client-code-btn">📋 Salin Kode</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Halaman Chat -->
+        <div id="chat-screen">
+            <div class="chat-header">
+                <h2>✅ Chat Berjalan</h2>
+                <span id="connection-status" style="color: #4caf50;">Terhubung</span>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Ketik pesan Anda...">
+                <button id="send-button">📩 Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variabel Global
+        let currentUsername = '';
+        let peerConnection = null;
+        let dataChannel = null;
+        const config = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+
+        // Elemen DOM yang Jelas
+        const initialScreen = document.getElementById('initial-screen');
+        const chatScreen = document.getElementById('chat-screen');
+        const usernameInput = document.getElementById('username-input');
+        
+        // Area Host
+        const hostBtn = document.getElementById('host-btn');
+        const hostSection = document.getElementById('host-section');
+        const hostOfferCode = document.getElementById('host-offer-code');
+        const hostAnswerCode = document.getElementById('host-answer-code');
+        const copyHostCodeBtn = document.getElementById('copy-host-code-btn');
+        const completeHostBtn = document.getElementById('complete-host-btn');
+        
+        // Area Client
+        const connectBtn = document.getElementById('connect-btn');
+        const clientSection = document.getElementById('client-section');
+        const clientOfferCode = document.getElementById('client-offer-code');
+        const clientAnswerCode = document.getElementById('client-answer-code');
+        const sendClientRequestBtn = document.getElementById('send-client-request-btn');
+        const copyClientCodeBtn = document.getElementById('copy-client-code-btn');
+        
+        // Area Chat
+        const chatMessagesEl = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const connectionStatus = document.getElementById('connection-status');
+
+        // Event Listener
+        hostBtn.addEventListener('click', showHostSection);
+        connectBtn.addEventListener('click', showClientSection);
+        copyHostCodeBtn.addEventListener('click', () => copyToClipboard(hostOfferCode));
+        copyClientCodeBtn.addEventListener('click', () => copyToClipboard(clientAnswerCode));
+        completeHostBtn.addEventListener('click', completeHostConnection);
+        sendClientRequestBtn.addEventListener('click', sendClientRequest);
+        sendButton.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => e.key === 'Enter' && sendMessage());
+
+        // Fungsi Tampilkan Area Sesuai Peran
+        function showHostSection() {
+            currentUsername = usernameInput.value.trim();
+            if (!currentUsername) return alert('⚠️ Masukkan nama Anda dulu!');
+            hostSection.style.display = 'block';
+            clientSection.style.display = 'none';
+            startHostConnection();
+        }
+
+        function showClientSection() {
+            currentUsername = usernameInput.value.trim();
+            if (!currentUsername) return alert('⚠️ Masukkan nama Anda dulu!');
+            clientSection.style.display = 'block';
+            hostSection.style.display = 'none';
+        }
+
+        // Fungsi Salin Kode ke Clipboard
+        function copyToClipboard(element) {
+            element.select();
+            document.execCommand('copy');
+            alert('✅ Kode berhasil disalin ke clipboard!');
+        }
+
+        // Fungsi Host Membuat Koneksi
+        function startHostConnection() {
+            peerConnection = new RTCPeerConnection(config);
+            dataChannel = peerConnection.createDataChannel('chatChannel');
+            setupDataChannel();
+
+            peerConnection.createOffer()
+                .then(offer => peerConnection.setLocalDescription(offer))
+                .then(() => {
+                    hostOfferCode.value = JSON.stringify(peerConnection.localDescription);
+                })
+                .catch(error => alert('❌ Error membuat koneksi: ' + error.message));
+
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) hostOfferCode.value = JSON.stringify(peerConnection.localDescription);
+            };
+        }
+
+        // Fungsi Host Selesaikan Koneksi
+        function completeHostConnection() {
+            const answerCode = hostAnswerCode.value.trim();
+            if (!answerCode) return alert('⚠️ Tempel kode balasan dulu!');
+            const remoteDesc = JSON.parse(answerCode);
+            peerConnection.setRemoteDescription(new RTCSessionDescription(remoteDesc))
+                .catch(error => alert('❌ Error menyelesaikan koneksi: ' + error.message));
+        }
+
+        // Fungsi Client Kirim Permintaan
+        function sendClientRequest() {
+            const offerCode = clientOfferCode.value.trim();
+            if (!offerCode) return alert('⚠️ Tempel kode dari host dulu!');
+            
+            peerConnection = new RTCPeerConnection(config);
+            peerConnection.ondatachannel = (event) => {
+                dataChannel = event.channel;
+                setupDataChannel();
+            };
+
+            const remoteDesc = JSON.parse(offerCode);
+            peerConnection.setRemoteDescription(new RTCSessionDescription(remoteDesc))
+                .then(() => peerConnection.createAnswer())
+                .then(answer => peerConnection.setLocalDescription(answer))
+                .then(() => {
+                    clientAnswerCode.value = JSON.stringify(peerConnection.localDescription);
+                    alert('✅ Kode balasan siap! Berikan ke host.');
+                })
+                .catch(error => alert('❌ Error menghubungi host: ' + error.message));
+
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) clientAnswerCode.value = JSON.stringify(peerConnection.localDescription);
+            };
+        }
+
+        // Fungsi Setup Channel Chat
+        function setupDataChannel() {
+            dataChannel.onopen = () => {
+                initialScreen.style.display = 'none';
+                chatScreen.style.display = 'flex';
+                messageInput.focus();
+            };
+
+            dataChannel.onclose = () => {
+                connectionStatus.textContent = '❌ Terputus';
+                connectionStatus.style.color = '#f44336';
+                alert('⚠️ Koneksi terputus!');
+            };
+
+            dataChannel.onmessage = (event) => {
+                displayMessage(JSON.parse(event.data));
+            };
+        }
+
+        // Fungsi Kirim & Tampilkan Pesan
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (!text || !dataChannel || dataChannel.readyState !== 'open') return;
+
+            const message = {
+                sender: currentUsername,
+                text: text,
+                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+            };
+
+            dataChannel.send(JSON.stringify(message));
+            displayMessage(message, true);
+            messageInput.value = '';
+        }
+
+        function displayMessage(message, isSelf = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isSelf ? 'message-self' : 'message-other'}`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-sender">${isSelf ? 'Anda' : message.sender}</div>
+                <div class="message-text">${message.text}</div>
+                <div class="message-time">${message.time}</div>
+            `;
+
+            chatMessagesEl.appendChild(messageDiv);
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }
+    </script>
+</body>
+</html>

