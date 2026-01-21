@@ -9,34 +9,27 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
             background-color: #121212;
-            color: #ffffff;
-            line-height: 1.6;
+            color: white;
             padding: 20px;
         }
 
         header {
             text-align: center;
-            padding: 30px 0;
-            background: linear-gradient(135deg, #1e1e1e, #333333);
+            padding: 30px;
+            background: linear-gradient(135deg, #1e1e1e, #333);
             border-radius: 10px;
             margin-bottom: 30px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0,255,255,0.2);
         }
 
         header h1 {
-            font-size: 2.5rem;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: #bbbbbb;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0,255,255,0.5);
         }
 
         .apk-container {
@@ -46,274 +39,222 @@
         }
 
         .apk-card {
-            background-color: #1e1e1e;
-            border-radius: 10px;
+            background: #1e1e1e;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        .apk-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-            border-color: rgba(0, 255, 255, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(0,255,255,0.2);
         }
 
         .apk-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
             color: #00ffff;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-        }
-
-        .apk-card p {
-            margin: 5px 0;
-            color: #cccccc;
+            margin-bottom: 10px;
         }
 
         .download-btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #00cccc, #009999);
+            background: #00cccc;
             color: #121212;
-            text-decoration: none;
+            padding: 10px 20px;
+            border: none;
             border-radius: 5px;
             font-weight: bold;
-            transition: all 0.3s ease;
             cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .download-btn:hover {
-            background: linear-gradient(135deg, #00ffff, #00bbbb);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            transform: scale(1.05);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #1e1e1e;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-        }
-
-        .modal-content h4 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #00ffff;
-            text-align: center;
-        }
-
-        .modal-content p {
-            margin: 10px 0;
-            color: #cccccc;
-        }
-
-        .close-btn {
-            background-color: #ff4444;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            float: right;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            background-color: #ff6666;
+            margin-top: 15px;
         }
 
         .disabled-note {
             color: #ff8888;
             font-style: italic;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #00ffff;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .close-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #00ffff;
+            color: #121212;
+            font-size: 24px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .help-tooltip {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            background: #00ffff;
+            color: #121212;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        
+         .tombol {
+      position: fixed;
+      bottom: 73px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #00ffff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 00.3s ease;
+    }
+    
+    .tombol:hover {
+      background-color: #2E865F;
+    }
+    
+    .tombol a {
+      text-decoration: none;
+      color: #000;
+      font-size: 24px;
+    }
     </style>
 </head>
 <body>
     <audio src="lagu.mp3" autoplay loop></audio>
+    <!-- Hapus tag audio dulu aja biar tidak bikin masalah -->
     <header>
         <h1>APK JB BY HRDY</h1>
-        <p>terima kasih telah mengunjungi situs web kami!</p>
+        <p>Terima kasih telah mengunjungi situs web kami!</p>
     </header>
 
     <div class="apk-container" id="apkContainer">
-        <!-- Kartu akan dibuat secara dinamis melalui JavaScript -->
+        <!-- Kartu akan muncul di sini -->
     </div>
 
     <div class="modal" id="downloadModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">Tutup</button>
             <h4 id="modalTitle"></h4>
-            <p><strong>Link Unduhan:</strong> <a id="modalLink" target="_blank" style="color: #00ffff;">Klik di sini</a></p>
+            <p><strong>Link Unduhan:</strong> <a id="modalLink" target="_blank" style="color:#00ffff;">Klik di sini</a></p>
             <p id="modalPassword"></p>
             <p id="modalNote"></p>
         </div>
     </div>
 
+    <div class="tombol">
+    <a href="index.html"><</a>
+    </div>
+    <div class="help-button" onclick="toggleTooltip()">?</div>
+    <div class="help-tooltip" id="helpTooltip">
+        <h3>JIKA ANDA MENGALAMI MASALAH</h3>
+        <ol>
+            <li>Screenshoot masalah anda</li>
+            <li>Kirimkan ke <a href="mailto:langkasekali188@gmail.com">langkasekali188@gmail.com</a></li>
+            <li>Tunggu proses hingga 1x24 jam</li>
+            <li>Jangan gunakan sembarangan</li>
+        </ol>
+    </div>
+
     <script>
-        // Daftar data APK
+        // Daftar APK
         const apkList = [
-            {
-                name: "APK AUTO SAVE CONTACT",
-                url: "https://www.mediafire.com/file/ic0nmflzed8fni7/AutoSave_Contact.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK BANINDO ELITE",
-                url: "https://www.mediafire.com/file/ufkd1ehejirgkbp/BANIDO_ELIT.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK BANNED GMAIL",
-                url: "https://www.mediafire.com/file/9a9i5gvg19ieq83/BANNED_GMAIL.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK BANNED & UNBANNED NUMBER",
-                url: "https://www.mediafire.com/file/5a45pqsnj1ywt11/BANNED_%2526_UNBANNED_NUMBER.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK DANA FAKE",
-                url: "https://www.mediafire.com/file/k27b3ibk4lz6t0y/FAKE_DANA_NOTIFIKASI.zip/file",
-                password: "K3R3N",
-                note: ""
-            },
-            {
-                name: "PIXELLAB ARMY",
-                url: "https://www.mediafire.com/download/3olqkvrmmeuowxq",
-                password: "subrek",
-                note: "Tautan tidak dapat diakses (tipe halaman tidak didukung)"
-            },
-            {
-                name: "PIXELLAB PURPLE",
-                url: "https://www.mediafire.com/download/vu6gcgjqni09vki",
-                password: "0708",
-                note: ""
-            },
-            {
-                name: "PIXELLAB RED",
-                url: "https://www.mediafire.com/download/bha2etexmvkvola",
-                password: "merah",
-                note: "Tautan tidak dapat diakses (tipe halaman tidak didukung)"
-            },
-            {
-                name: "APK BEKU PAYMENT",
-                url: "https://www.mediafire.com/file/6akvqz49xtw0ev2/APK_BEKU_PAYMENT.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK PUSH KONTAK",
-                url: "https://www.mediafire.com/file/nblb38pjap3a2fu/Apk%25E2%2580%25A2Push%25E2%2580%25A2Kontak.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK KENON",
-                url: "https://www.mediafire.com/file/9rxopb6zywgre54/APK_KENON.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK JPM",
-                url: "https://www.mediafire.com/file/bebwq6vhpb17v83/JPM.apk/file",
-                password: "",
-                note: "Informasi detail tidak tersedia"
-            },
-            {
-                name: "APK PIXELLAB LOGO",
-                url: "https://www.mediafire.com/file/fdsli77j52rf2hq/Pixellab_Logo.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK TEMP MAIL PREMIUM",
-                url: "https://www.mediafire.com/file/de03ykicvzr1ett/Temp_Mail_Premium.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "BANNED PRIVATE",
-                url: "https://www.mediafire.com/file/9fme89czncavjw7/BANNED_PRIVATE_2.23.1.11_r_sign.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK SUPORT WA",
-                url: "https://www.mediafire.com/file/x1jm6pi30yygmh3/SUPORT_LAPOR_WA_.apk/file",
-                password: "",
-                note: ""
-            },
-            {
-                name: "APK QRIS NO KTP",
-                url: "https://www.mediafire.com/file/qhefhyxwwavdn2g/Acis_Pedia_Premium.apk/file",
-                password: "",
-                note: ""
-            }
+            { name: "APK AUTO SAVE CONTACT", url: "https://www.mediafire.com/file/ic0nmflzed8fni7/AutoSave_Contact.apk/file", password: "", note: "" },
+            { name: "APK BANINDO ELITE", url: "https://www.mediafire.com/file/ufkd1ehejirgkbp/BANIDO_ELIT.apk/file", password: "", note: "" },
+            { name: "APK BANNED GMAIL", url: "https://www.mediafire.com/file/9a9i5gvg19ieq83/BANNED_GMAIL.apk/file", password: "", note: "" },
+            { name: "APK BANNED & UNBANNED NUMBER", url: "https://www.mediafire.com/file/5a45pqsnj1ywt11/BANNED_%2526_UNBANNED_NUMBER.apk/file", password: "", note: "" },
+            { name: "APK DANA FAKE", url: "https://www.mediafire.com/file/k27b3ibk4lz6t0y/FAKE_DANA_NOTIFIKASI.zip/file", password: "K3R3N", note: "" },
+            { name: "PIXELLAB ARMY", url: "https://www.mediafire.com/download/3olqkvrmmeuowxq", password: "subrek", note: "Tautan tidak dapat diakses" },
+            { name: "PIXELLAB PURPLE", url: "https://www.mediafire.com/file/vu6gcgjqni09vki/Pixellab_Purple_Mod.zip/file", password: "0708", note: "" },
+            { name: "PIXELLAB RED", url: "https://www.mediafire.com/download/bha2etexmvkvola", password: "merah", note: "Tautan tidak dapat diakses" },
+            { name: "APK BEKU PAYMENT", url: "https://www.mediafire.com/file/6akvqz49xtw0ev2/APK_BEKU_PAYMENT.apk/file", password: "", note: "" },
+            { name: "APK PUSH KONTAK", url: "https://www.mediafire.com/file/nblb38pjap3a2fu/Apk%25E2%2580%25A2Push%25E2%2580%25A2Kontak.apk/file", password: "", note: "" },
+            { name: "APK KENON", url: "https://www.mediafire.com/file/9rxopb6zywgre54/APK_KENON.apk/file", password: "", note: "" },
+            { name: "APK JPM", url: "https://www.mediafire.com/file/bebwq6vhpb17v83/JPM.apk/file", password: "", note: "Informasi detail tidak tersedia" },
+            { name: "APK PIXELLAB LOGO", url: "https://www.mediafire.com/file/fdsli77j52rf2hq/Pixellab_Logo.apk/file", password: "", note: "" },
+            { name: "APK TEMP MAIL PREMIUM", url: "https://www.mediafire.com/file/de03ykicvzr1ett/Temp_Mail_Premium.apk/file", password: "", note: "" },
+            { name: "BANNED PRIVATE", url: "https://www.mediafire.com/file/9fme89czncavjw7/BANNED_PRIVATE_2.23.1.11_r_sign.apk/file", password: "", note: "" },
+            { name: "APK SUPORT WA", url: "https://www.mediafire.com/file/x1jm6pi30yygmh3/SUPORT_LAPOR_WA_.apk/file", password: "", note: "" },
+            { name: "APK QRIS NO KTP", url: "https://www.mediafire.com/file/qhefhyxwwavdn2g/Acis_Pedia_Premium.apk/file", password: "", note: "" }
         ];
 
-        // Buat kartu APK secara dinamis
+        // Buat kartu satu per satu
         const container = document.getElementById('apkContainer');
-        apkList.forEach(apk => {
+        for(let i = 0; i < apkList.length; i++) {
+            const apk = apkList[i];
+            
+            // Buat elemen kartu
             const card = document.createElement('div');
             card.className = 'apk-card';
             
+            // Judul
             const title = document.createElement('h3');
             title.textContent = apk.name;
+            card.appendChild(title);
             
-            const note = document.createElement('p');
-            if (apk.note) {
-                note.textContent = `Catatan: ${apk.note}`;
+            // Catatan jika ada
+            if(apk.note) {
+                const note = document.createElement('p');
+                note.textContent = 'Catatan: ' + apk.note;
                 note.className = 'disabled-note';
+                card.appendChild(note);
             }
             
+            // Tombol
             const btn = document.createElement('button');
             btn.className = 'download-btn';
-            btn.textContent = apk.note.includes('tidak dapat diakses') ? 'Tidak Tersedia' : 'Lihat Unduhan';
-            btn.disabled = apk.note.includes('tidak dapat diakses');
-            btn.onclick = () => openModal(apk);
-            
-            card.appendChild(title);
-            if (apk.note) card.appendChild(note);
+            if(apk.note.includes('tidak dapat diakses')) {
+                btn.textContent = 'Tidak Tersedia';
+                btn.disabled = true;
+                btn.style.backgroundColor = '#555';
+            } else {
+                btn.textContent = 'Lihat Unduhan';
+                btn.onclick = function() {
+                    document.getElementById('modalTitle').textContent = apk.name;
+                    document.getElementById('modalLink').href = apk.url;
+                    document.getElementById('modalPassword').textContent = apk.password ? 'Password: ' + apk.password : '';
+                    document.getElementById('modalNote').textContent = apk.note ? 'Catatan: ' + apk.note : '';
+                    document.getElementById('downloadModal').style.display = 'flex';
+                }
+            }
             card.appendChild(btn);
             
+            // Tambahkan ke container
             container.appendChild(card);
-        });
-
-        // Fungsi buka modal
-        function openModal(apk) {
-            const modal = document.getElementById('downloadModal');
-            document.getElementById('modalTitle').textContent = apk.name;
-            document.getElementById('modalLink').href = apk.url;
-            document.getElementById('modalPassword').textContent = apk.password ? `Password: ${apk.password}` : '';
-            document.getElementById('modalNote').textContent = apk.note ? `Catatan: ${apk.note}` : '';
-            modal.style.display = 'flex';
         }
 
         // Fungsi tutup modal
@@ -321,12 +262,28 @@
             document.getElementById('downloadModal').style.display = 'none';
         }
 
-        // Tutup modal jika klik di luar konten
-        window.onclick = function(e) {
-            if (e.target === document.getElementById('downloadModal')) {
+        // Fungsi tooltip
+        function toggleTooltip() {
+            const tooltip = document.getElementById('helpTooltip');
+            tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Tutup tooltip jika klik luar
+        document.addEventListener('click', function(e) {
+            const btn = document.querySelector('.help-button');
+            const tooltip = document.getElementById('helpTooltip');
+            if(!btn.contains(e.target) && !tooltip.contains(e.target)) {
+                tooltip.style.display = 'none';
+            }
+        });
+
+        // Tutup modal jika klik luar
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('downloadModal');
+            if(e.target === modal) {
                 closeModal();
             }
-        }
+        });
     </script>
 </body>
 </html>
