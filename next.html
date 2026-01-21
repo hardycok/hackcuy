@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hrdy chat</title>
+    <title>APK JB BY HRDY</title>
     <style>
         * {
             margin: 0;
@@ -14,446 +14,317 @@
 
         body {
             background-color: #121212;
-            color: #e0e0e0;
+            color: #ffffff;
             line-height: 1.6;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        #initial-screen {
+        header {
             text-align: center;
-            padding: 50px 20px;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #1e1e1e, #333333);
             border-radius: 10px;
-            background-color: #1e1e1e;
-            margin-top: 30px;
-        }
-
-        #initial-screen h1 {
-            color: #bb86fc;
             margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
-        .input-group {
-            margin-bottom: 20px;
+        header h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            margin-bottom: 10px;
         }
 
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            color: #bb86fc;
-            margin-bottom: 8px;
+        header p {
+            font-size: 1.1rem;
+            color: #bbbbbb;
         }
 
-        .input-group input, 
-        .input-group textarea {
-            width: 100%;
-            max-width: 400px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2c2c2c;
-            color: #e0e0e0;
-            font-size: 14px;
-            outline: none;
-            resize: none;
+        .apk-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        .input-group textarea {
-            height: 80px;
+        .apk-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
         }
 
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+        .apk-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 0.5);
         }
 
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+        .apk-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
-        .btn-primary {
-            background-color: #bb86fc;
+        .apk-card p {
+            margin: 5px 0;
+            color: #cccccc;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #00cccc, #009999);
             color: #121212;
-            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
         }
 
-        .btn-primary:hover {
-            background-color: #9c6cd9;
+        .download-btn:hover {
+            background: linear-gradient(135deg, #00ffff, #00bbbb);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
-        .btn-secondary {
-            background-color: #3700b3;
-            color: #e0e0e0;
-            font-weight: 600;
-        }
-
-        .btn-secondary:hover {
-            background-color: #29008a;
-        }
-
-        .action-btn {
-            padding: 8px 15px;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        #chat-screen {
+        .modal {
             display: none;
-            flex-direction: column;
-            height: 90vh;
-            justify-content: space-between;
-        }
-
-        .chat-header {
-            background-color: #1e1e1e;
-            padding: 15px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            justify-content: space-between;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #333;
         }
 
-        .chat-header h2 {
-            color: #bb86fc;
-            font-size: 18px;
-        }
-
-        .chat-messages {
+        .modal-content {
             background-color: #1e1e1e;
-            padding: 20px;
-            overflow-y: auto;
-            flex-grow: 1;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
         }
 
-        .message {
-            margin-bottom: 15px;
-            max-width: 70%;
-            padding: 10px 15px;
-            border-radius: 15px;
+        .modal-content h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-align: center;
         }
 
-        .message-sender {
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 3px;
-            color: #bb86fc;
+        .modal-content p {
+            margin: 10px 0;
+            color: #cccccc;
         }
 
-        .message-text {
-            font-size: 15px;
-            word-wrap: break-word;
-        }
-
-        .message-time {
-            font-size: 11px;
-            text-align: right;
-            margin-top: 3px;
-            color: #888;
-        }
-
-        .message-self {
-            background-color: #bb86fc;
-            color: #121212;
-            margin-left: auto;
-        }
-
-        .message-other {
-            background-color: #2c2c2c;
-            color: #e0e0e0;
-            margin-right: auto;
-        }
-
-        .chat-input {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 0 0 10px 10px;
-            display: flex;
-            gap: 10px;
-            border-top: 1px solid #333;
-        }
-
-        #message-input {
-            flex-grow: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2c2c2c;
-            color: #e0e0e0;
-            outline: none;
-            font-size: 15px;
-        }
-
-        #send-button {
-            padding: 12px 25px;
-            background-color: #bb86fc;
-            color: #121212;
+        .close-btn {
+            background-color: #ff4444;
+            color: white;
+            padding: 8px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
+            float: right;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
 
-        #send-button:hover {
-            background-color: #9c6cd9;
+        .close-btn:hover {
+            background-color: #ff6666;
         }
 
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #2c2c2c;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #bb86fc;
-            border-radius: 4px;
+        .disabled-note {
+            color: #ff8888;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-      <audio src="lagu.mp3" autoplay loop></audio>
-        <!-- Halaman Awal dengan Tempat Kode Jelas -->
-        <div id="initial-screen">
-            <h1>Hrdy chat</h1>
-            
-            <!-- Kolom Nama -->
-            <div class="input-group">
-                <label for="username-input">✅ Masukkan Nama Anda:</label>
-                <input type="text" id="username-input" placeholder="Contoh: Hardy zen..." required>
-            </div>
+    <header>
+        <h1>APK JB BY HRDY</h1>
+        <p>terima kasih telah mengunjungi situs web kami!</p>
+    </header>
 
-            <!-- Pilihan Peran -->
-            <div class="button-group">
-                <button class="btn btn-primary" id="host-btn">📌 Jadikan Saya Host</button>
-                <button class="btn btn-secondary" id="connect-btn">🔗 Hubungi Host</button>
-            </div>
+    <div class="apk-container" id="apkContainer">
+        <!-- Kartu akan dibuat secara dinamis melalui JavaScript -->
+    </div>
 
-            <!-- Area untuk HOST -->
-            <div id="host-section" style="display: none;">
-                <div class="input-group">
-                    <label>📤 Langkah 1: Salin Kode Ini Berikan ke Teman:</label>
-                    <textarea id="host-offer-code" readonly placeholder="Kode akan muncul di sini..."></textarea>
-                    <button class="btn btn-primary action-btn" id="copy-host-code-btn">📋 Salin Kode</button>
-                </div>
-                <div class="input-group">
-                    <label>📥 Langkah 2: Tempel Kode Balasan dari Teman:</label>
-                    <textarea id="host-answer-code" placeholder="Tempel kode balasan di sini..."></textarea>
-                    <button class="btn btn-secondary action-btn" id="complete-host-btn">✅ Selesaikan Koneksi</button>
-                </div>
-            </div>
-
-            <!-- Area untuk PENGGUNA YANG MENGHUBUNGI -->
-            <div id="client-section" style="display: none;">
-                <div class="input-group">
-                    <label>📥 Langkah 1: Tempel Kode dari Host:</label>
-                    <textarea id="client-offer-code" placeholder="Tempel kode host di sini..."></textarea>
-                    <button class="btn btn-primary action-btn" id="send-client-request-btn">📤 Kirim Permintaan</button>
-                </div>
-                <div class="input-group">
-                    <label>📤 Langkah 2: Salin Kode Ini Berikan ke Host:</label>
-                    <textarea id="client-answer-code" readonly placeholder="Kode balasan akan muncul di sini..."></textarea>
-                    <button class="btn btn-primary action-btn" id="copy-client-code-btn">📋 Salin Kode</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Halaman Chat -->
-        <div id="chat-screen">
-            <div class="chat-header">
-                <h2>✅ Chat Berjalan</h2>
-                <span id="connection-status" style="color: #4caf50;">Terhubung</span>
-            </div>
-            <div class="chat-messages" id="chat-messages"></div>
-            <div class="chat-input">
-                <input type="text" id="message-input" placeholder="Ketik pesan Anda...">
-                <button id="send-button">📩 Kirim</button>
-            </div>
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">Tutup</button>
+            <h4 id="modalTitle"></h4>
+            <p><strong>Link Unduhan:</strong> <a id="modalLink" target="_blank" style="color: #00ffff;">Klik di sini</a></p>
+            <p id="modalPassword"></p>
+            <p id="modalNote"></p>
         </div>
     </div>
 
     <script>
-        // Variabel Global
-        let currentUsername = '';
-        let peerConnection = null;
-        let dataChannel = null;
-        const config = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+        // Daftar data APK
+        const apkList = [
+            {
+                name: "APK AUTO SAVE CONTACT",
+                url: "https://www.mediafire.com/file/ic0nmflzed8fni7/AutoSave_Contact.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK BANINDO ELITE",
+                url: "https://www.mediafire.com/file/ufkd1ehejirgkbp/BANIDO_ELIT.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK BANNED GMAIL",
+                url: "https://www.mediafire.com/file/9a9i5gvg19ieq83/BANNED_GMAIL.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK BANNED & UNBANNED NUMBER",
+                url: "https://www.mediafire.com/file/5a45pqsnj1ywt11/BANNED_%2526_UNBANNED_NUMBER.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK DANA FAKE",
+                url: "https://www.mediafire.com/file/k27b3ibk4lz6t0y/FAKE_DANA_NOTIFIKASI.zip/file",
+                password: "K3R3N",
+                note: ""
+            },
+            {
+                name: "PIXELLAB ARMY",
+                url: "https://www.mediafire.com/download/3olqkvrmmeuowxq",
+                password: "subrek",
+                note: "Tautan tidak dapat diakses (tipe halaman tidak didukung)"
+            },
+            {
+                name: "PIXELLAB PURPLE",
+                url: "https://www.mediafire.com/download/vu6gcgjqni09vki",
+                password: "0708",
+                note: ""
+            },
+            {
+                name: "PIXELLAB RED",
+                url: "https://www.mediafire.com/download/bha2etexmvkvola",
+                password: "merah",
+                note: "Tautan tidak dapat diakses (tipe halaman tidak didukung)"
+            },
+            {
+                name: "APK BEKU PAYMENT",
+                url: "https://www.mediafire.com/file/6akvqz49xtw0ev2/APK_BEKU_PAYMENT.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK PUSH KONTAK",
+                url: "https://www.mediafire.com/file/nblb38pjap3a2fu/Apk%25E2%2580%25A2Push%25E2%2580%25A2Kontak.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK KENON",
+                url: "https://www.mediafire.com/file/9rxopb6zywgre54/APK_KENON.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK JPM",
+                url: "https://www.mediafire.com/file/bebwq6vhpb17v83/JPM.apk/file",
+                password: "",
+                note: "Informasi detail tidak tersedia"
+            },
+            {
+                name: "APK PIXELLAB LOGO",
+                url: "https://www.mediafire.com/file/fdsli77j52rf2hq/Pixellab_Logo.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK TEMP MAIL PREMIUM",
+                url: "https://www.mediafire.com/file/de03ykicvzr1ett/Temp_Mail_Premium.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "BANNED PRIVATE",
+                url: "https://www.mediafire.com/file/9fme89czncavjw7/BANNED_PRIVATE_2.23.1.11_r_sign.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK SUPORT WA",
+                url: "https://www.mediafire.com/file/x1jm6pi30yygmh3/SUPORT_LAPOR_WA_.apk/file",
+                password: "",
+                note: ""
+            },
+            {
+                name: "APK QRIS NO KTP",
+                url: "https://www.mediafire.com/file/qhefhyxwwavdn2g/Acis_Pedia_Premium.apk/file",
+                password: "",
+                note: ""
+            }
+        ];
 
-        // Elemen DOM yang Jelas
-        const initialScreen = document.getElementById('initial-screen');
-        const chatScreen = document.getElementById('chat-screen');
-        const usernameInput = document.getElementById('username-input');
-        
-        // Area Host
-        const hostBtn = document.getElementById('host-btn');
-        const hostSection = document.getElementById('host-section');
-        const hostOfferCode = document.getElementById('host-offer-code');
-        const hostAnswerCode = document.getElementById('host-answer-code');
-        const copyHostCodeBtn = document.getElementById('copy-host-code-btn');
-        const completeHostBtn = document.getElementById('complete-host-btn');
-        
-        // Area Client
-        const connectBtn = document.getElementById('connect-btn');
-        const clientSection = document.getElementById('client-section');
-        const clientOfferCode = document.getElementById('client-offer-code');
-        const clientAnswerCode = document.getElementById('client-answer-code');
-        const sendClientRequestBtn = document.getElementById('send-client-request-btn');
-        const copyClientCodeBtn = document.getElementById('copy-client-code-btn');
-        
-        // Area Chat
-        const chatMessagesEl = document.getElementById('chat-messages');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-        const connectionStatus = document.getElementById('connection-status');
-
-        // Event Listener
-        hostBtn.addEventListener('click', showHostSection);
-        connectBtn.addEventListener('click', showClientSection);
-        copyHostCodeBtn.addEventListener('click', () => copyToClipboard(hostOfferCode));
-        copyClientCodeBtn.addEventListener('click', () => copyToClipboard(clientAnswerCode));
-        completeHostBtn.addEventListener('click', completeHostConnection);
-        sendClientRequestBtn.addEventListener('click', sendClientRequest);
-        sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keypress', (e) => e.key === 'Enter' && sendMessage());
-
-        // Fungsi Tampilkan Area Sesuai Peran
-        function showHostSection() {
-            currentUsername = usernameInput.value.trim();
-            if (!currentUsername) return alert('⚠️ Masukkan nama Anda dulu!');
-            hostSection.style.display = 'block';
-            clientSection.style.display = 'none';
-            startHostConnection();
-        }
-
-        function showClientSection() {
-            currentUsername = usernameInput.value.trim();
-            if (!currentUsername) return alert('⚠️ Masukkan nama Anda dulu!');
-            clientSection.style.display = 'block';
-            hostSection.style.display = 'none';
-        }
-
-        // Fungsi Salin Kode ke Clipboard
-        function copyToClipboard(element) {
-            element.select();
-            document.execCommand('copy');
-            alert('✅ Kode berhasil disalin ke clipboard!');
-        }
-
-        // Fungsi Host Membuat Koneksi
-        function startHostConnection() {
-            peerConnection = new RTCPeerConnection(config);
-            dataChannel = peerConnection.createDataChannel('chatChannel');
-            setupDataChannel();
-
-            peerConnection.createOffer()
-                .then(offer => peerConnection.setLocalDescription(offer))
-                .then(() => {
-                    hostOfferCode.value = JSON.stringify(peerConnection.localDescription);
-                })
-                .catch(error => alert('❌ Error membuat koneksi: ' + error.message));
-
-            peerConnection.onicecandidate = (event) => {
-                if (event.candidate) hostOfferCode.value = JSON.stringify(peerConnection.localDescription);
-            };
-        }
-
-        // Fungsi Host Selesaikan Koneksi
-        function completeHostConnection() {
-            const answerCode = hostAnswerCode.value.trim();
-            if (!answerCode) return alert('⚠️ Tempel kode balasan dulu!');
-            const remoteDesc = JSON.parse(answerCode);
-            peerConnection.setRemoteDescription(new RTCSessionDescription(remoteDesc))
-                .catch(error => alert('❌ Error menyelesaikan koneksi: ' + error.message));
-        }
-
-        // Fungsi Client Kirim Permintaan
-        function sendClientRequest() {
-            const offerCode = clientOfferCode.value.trim();
-            if (!offerCode) return alert('⚠️ Tempel kode dari host dulu!');
+        // Buat kartu APK secara dinamis
+        const container = document.getElementById('apkContainer');
+        apkList.forEach(apk => {
+            const card = document.createElement('div');
+            card.className = 'apk-card';
             
-            peerConnection = new RTCPeerConnection(config);
-            peerConnection.ondatachannel = (event) => {
-                dataChannel = event.channel;
-                setupDataChannel();
-            };
-
-            const remoteDesc = JSON.parse(offerCode);
-            peerConnection.setRemoteDescription(new RTCSessionDescription(remoteDesc))
-                .then(() => peerConnection.createAnswer())
-                .then(answer => peerConnection.setLocalDescription(answer))
-                .then(() => {
-                    clientAnswerCode.value = JSON.stringify(peerConnection.localDescription);
-                    alert('✅ Kode balasan siap! Berikan ke host.');
-                })
-                .catch(error => alert('❌ Error menghubungi host: ' + error.message));
-
-            peerConnection.onicecandidate = (event) => {
-                if (event.candidate) clientAnswerCode.value = JSON.stringify(peerConnection.localDescription);
-            };
-        }
-
-        // Fungsi Setup Channel Chat
-        function setupDataChannel() {
-            dataChannel.onopen = () => {
-                initialScreen.style.display = 'none';
-                chatScreen.style.display = 'flex';
-                messageInput.focus();
-            };
-
-            dataChannel.onclose = () => {
-                connectionStatus.textContent = '❌ Terputus';
-                connectionStatus.style.color = '#f44336';
-                alert('⚠️ Koneksi terputus!');
-            };
-
-            dataChannel.onmessage = (event) => {
-                displayMessage(JSON.parse(event.data));
-            };
-        }
-
-        // Fungsi Kirim & Tampilkan Pesan
-        function sendMessage() {
-            const text = messageInput.value.trim();
-            if (!text || !dataChannel || dataChannel.readyState !== 'open') return;
-
-            const message = {
-                sender: currentUsername,
-                text: text,
-                time: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
-            };
-
-            dataChannel.send(JSON.stringify(message));
-            displayMessage(message, true);
-            messageInput.value = '';
-        }
-
-        function displayMessage(message, isSelf = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isSelf ? 'message-self' : 'message-other'}`;
+            const title = document.createElement('h3');
+            title.textContent = apk.name;
             
-            messageDiv.innerHTML = `
-                <div class="message-sender">${isSelf ? 'Anda' : message.sender}</div>
-                <div class="message-text">${message.text}</div>
-                <div class="message-time">${message.time}</div>
-            `;
+            const note = document.createElement('p');
+            if (apk.note) {
+                note.textContent = `Catatan: ${apk.note}`;
+                note.className = 'disabled-note';
+            }
+            
+            const btn = document.createElement('button');
+            btn.className = 'download-btn';
+            btn.textContent = apk.note.includes('tidak dapat diakses') ? 'Tidak Tersedia' : 'Lihat Unduhan';
+            btn.disabled = apk.note.includes('tidak dapat diakses');
+            btn.onclick = () => openModal(apk);
+            
+            card.appendChild(title);
+            if (apk.note) card.appendChild(note);
+            card.appendChild(btn);
+            
+            container.appendChild(card);
+        });
 
-            chatMessagesEl.appendChild(messageDiv);
-            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        // Fungsi buka modal
+        function openModal(apk) {
+            const modal = document.getElementById('downloadModal');
+            document.getElementById('modalTitle').textContent = apk.name;
+            document.getElementById('modalLink').href = apk.url;
+            document.getElementById('modalPassword').textContent = apk.password ? `Password: ${apk.password}` : '';
+            document.getElementById('modalNote').textContent = apk.note ? `Catatan: ${apk.note}` : '';
+            modal.style.display = 'flex';
+        }
+
+        // Fungsi tutup modal
+        function closeModal() {
+            document.getElementById('downloadModal').style.display = 'none';
+        }
+
+        // Tutup modal jika klik di luar konten
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('downloadModal')) {
+                closeModal();
+            }
         }
     </script>
 </body>
